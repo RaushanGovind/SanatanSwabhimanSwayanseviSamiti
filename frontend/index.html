@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en-IN">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <title>Sanatan Swabhiman Swayamsevi Samiti</title>
+</head>
+
+<body>
+  <!-- ERROR LOGGER FOR DEBUGGING -->
+  <div id="debug-error-console"
+    style="background: #fee2e2; color: #991b1b; padding: 20px; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10001; font-family: monospace; display: none; max-height: 200px; overflow-y: auto; border-top: 2px solid #ef4444;">
+    <strong>⚠️ Runtime Error Detected:</strong>
+    <div id="error-message"></div>
+  </div>
+
+  <!-- SERVER VERIFICATION HEADERS -->
+  <div id="debug-verify"
+    style="background: #10b981; color: white; padding: 10px; position: fixed; top: 0; left: 0; width: 100%; z-index: 10000; text-align: center; font-family: sans-serif; font-weight: bold;">
+    ✅ SERVER IS CONNECTED (Vite)
+  </div>
+
+  <div id="root"></div>
+
+  <script>
+    window.onerror = function (message, source, lineno, colno, error) {
+      const console = document.getElementById('debug-error-console');
+      const msg = document.getElementById('error-message');
+      console.style.display = 'block';
+      msg.innerHTML += '<p>' + message + ' at ' + source + ':' + lineno + '</p>';
+      return false;
+    };
+
+    console.log('Index.html: App starting...');
+    window.onload = () => {
+      // If Root is not empty after 2 seconds, hide the verify banner
+      setTimeout(() => {
+        if (document.getElementById('root').innerHTML !== "") {
+          document.getElementById('debug-verify').style.display = 'none';
+        } else {
+          document.getElementById('debug-verify').style.background = 'orange';
+          document.getElementById('debug-verify').innerText = '⏳ Waiting for React to mount... (If stuck, check Console)';
+        }
+      }, 2000);
+    };
+  </script>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
