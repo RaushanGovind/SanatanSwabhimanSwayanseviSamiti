@@ -8,4 +8,7 @@ python-multipart
 pydantic
 anyio
 email-validator
+
 httpx
+dnspython
+

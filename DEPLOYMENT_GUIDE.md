@@ -37,24 +37,21 @@ First, you need to push your local changes to a GitHub repository.
 
 1.  Go to **[dashboard.render.com](https://dashboard.render.com)**.
 2.  Click **New +** -> **Web Service**.
-3.  Connect your GitHub repository (`jagdamba-samiti`).
+
+3.  Connect your GitHub repository (`SanatanSwabhimanSwayanseviSamiti`).
 4.  **Configure Settings**:
-    *   **Name**: `jagdamba-backend` (or similar)
-    *   **Region**: Singapore (closest to India usually)
+    *   **Name**: `jagdamba-backend`
+    *   **Region**: Singapore (or closest to you)
     *   **Branch**: `main`
-    *   **Root Directory**: `.` (leave empty)
+    *   **Root Directory**: `backend`  <-- IMPORTANT
     *   **Runtime**: `Python 3`
-    *   **Build Command**: `pip install -r backend/requirements.txt`
-    *   **Start Command**: `uvicorn backend.main:app --host 0.0.0.0 --port 10000`
-5.  **Environment Variables** (Click "Advanced" or "Environment"):
-    *   Key: `MONGO_URI`
-        *   Value: `mongodb+srv://MaaJagdambaSamiti:Raushan236@cluster0.rwxvzfk.mongodb.net/jagdamba_samiti?retryWrites=true&w=majority&appName=Cluster0`
-    *   Key: `DB_NAME`
-        *   Value: `MaaJagdambaSamiti`
-    *   Key: `SECRET_KEY`
-        *   Value: (Generate a secure random string or copy from your local .env)
-    *   Key: `PYTHON_VERSION`
-        *   Value: `3.11.0` (Recommended)
+    *   **Build Command**: `pip install -r requirements.txt`
+    *   **Start Command**: `uvicorn main:app --host 0.0.0.0 --port 10000`
+5.  **Environment Variables**:
+    *   Key: `MONGO_URI` (Value: your connection string)
+    *   Key: `DB_NAME`: `MaaJagdambaSamiti`
+    *   Key: `PYTHON_VERSION`: `3.11.0`  <-- Add this for stability
+
 6.  Click **Create Web Service**.
 7.  Wait for the build to finish. Once live, copy the **Backend URL** (e.g., `https://jagdamba-backend.onrender.com`).
 
