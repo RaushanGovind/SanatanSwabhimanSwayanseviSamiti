@@ -11,23 +11,27 @@ const ProtectedRoute = ({ allowedRoles }) => {
     }
 
     // Check if user has access based on role OR position
+    const userRole = (user.role || '').toLowerCase();
+    const userPos = (user.position || '').toLowerCase();
+
     const hasAccess = allowedRoles && (
-        allowedRoles.includes(user.role) ||
-        allowedRoles.includes(user.position)
+        allowedRoles.includes(userRole) ||
+        allowedRoles.includes(userPos) ||
+        (userRole === 'super_admin') // Super admin always has access
     );
 
     if (allowedRoles && !hasAccess) {
         // User doesn't have access to this route - redirect to appropriate dashboard
+
         // Check if they're a committee member (by position)
-        const committeePositions = ['president', 'vice_president', 'secretary', 'treasurer', 'executive_member', 'coordinator'];
-        if (committeePositions.includes(user.position)) {
+        const committeePositions = ['admin', 'super_admin', 'president', 'vice_president', 'secretary', 'joint_secretary', 'treasurer', 'executive_member', 'coordinator', 'auditor', 'pro', 'legal_advisor', 'medical_advisor'];
+        if (committeePositions.includes(userPos) || committeePositions.includes(userRole)) {
             return <Navigate to="/admin" replace />;
         }
 
         // Otherwise redirect based on role
-        if (user.role === 'admin' || user.role === 'super_admin') return <Navigate to="/admin" replace />;
-        if (user.role === 'family_head') return <Navigate to="/family" replace />;
-        if (user.role === 'family_member' || user.role === 'member') return <Navigate to="/member" replace />;
+        if (userRole === 'family_head') return <Navigate to="/family" replace />;
+        if (userRole === 'family_member' || userRole === 'member') return <Navigate to="/member" replace />;
         return <Navigate to="/" replace />;
     }
 

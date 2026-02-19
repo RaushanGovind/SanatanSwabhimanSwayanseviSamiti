@@ -103,12 +103,17 @@ const Hero = () => {
                                         </span>
                                     </p>
                                     <button
+
                                         onClick={() => {
-                                            const isExecutive = ['admin', 'super_admin', 'president', 'vice_president', 'secretary', 'joint_secretary', 'treasurer', 'executive_member', 'auditor', 'pro'].includes(user.role) || (user.position && user.position !== 'none');
+                                            const role = (user.role || '').toLowerCase();
+                                            const pos = (user.position || '').toLowerCase();
+                                            const committeePositions = ['admin', 'super_admin', 'president', 'vice_president', 'secretary', 'joint_secretary', 'treasurer', 'executive_member', 'auditor', 'pro', 'legal_advisor', 'medical_advisor', 'coordinator'];
+
+                                            const isExecutive = committeePositions.includes(role) || (pos && pos !== 'none' && committeePositions.includes(pos));
 
                                             if (isExecutive) {
                                                 navigate('/admin');
-                                            } else if (user.role === 'family_head') {
+                                            } else if (role === 'family_head') {
                                                 navigate('/family');
                                             } else {
                                                 navigate('/member');
@@ -164,7 +169,7 @@ const Hero = () => {
                 </div>
 
             </div>
-        </section>
+        </section >
     );
 };
 
