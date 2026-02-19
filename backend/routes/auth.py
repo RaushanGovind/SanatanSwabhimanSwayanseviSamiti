@@ -104,7 +104,8 @@ async def login(credentials: dict):
     
     if user:
         # Check if the user's actual role/position matches the requested role
-        COMMITTEE_POSITIONS = ['president', 'vice_president', 'secretary', 'joint_secretary', 'treasurer', 'executive_member', 'auditor', 'pro', 'coordinator']
+
+        COMMITTEE_POSITIONS = ['president', 'vice_president', 'secretary', 'joint_secretary', 'treasurer', 'executive_member', 'auditor', 'pro', 'coordinator', 'legal_advisor', 'medical_advisor']
         
         user_role = user.get("role", "").lower()
         user_position = user.get("position", "none").lower()

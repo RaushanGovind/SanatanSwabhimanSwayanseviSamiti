@@ -59,15 +59,18 @@ async def check_target():
         print(f"Problem User: {u.get('name')} | Role: {u.get('role')} | Phone: {u.get('phone')}")
 
 
-    # Case-insensitive search for role 'user'
-    print("\n--- ANY USER WITH ROLE 'user' (CASE INSENSITIVE) ---")
-    cursor = db.users.find({"role": {"$regex": "^user$", "$options": "i"}})
-    found = False
-    async for u in cursor:
-        print(f"Found: {u.get('name')} | Role: {u.get('role')} | Phone: {u.get('phone')}")
-        found = True
-    if not found:
-        print("No users found with role 'user' (case-insensitive).")
+
+
+    # Search for user 7700000020
+    print("\n--- SEARCH FOR USER 7700000020 ---")
+    u = await db.users.find_one({"phone": "7700000020"})
+    if u:
+        print(f"User Found: {u.get('name')}")
+        print(f"Role: {u.get('role')}")
+        print(f"Position: {u.get('position')}")
+        print(f"Raw Doc: {u}")
+    else:
+        print("User 7700000020 NOT FOUND.")
 
 
 if __name__ == "__main__":
